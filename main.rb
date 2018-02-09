@@ -9,7 +9,7 @@
 # - via easter egg question ("reset_answers")
 # - ability to have eight ball print all answers
 # - via easter egg question ("print_answers")
-
+require_relative 'answers'
 
 puts 'Welcome to the Magic Eightball'
 puts 'Type quit when you\'re done'
@@ -17,6 +17,7 @@ puts 'Type quit when you\'re done'
 @finished = false
 
 def program
+  @answers = Answers.new 
   until @finished == true
     print "Ask the Magic Eightball a question\n>"
     question = gets.chomp
@@ -24,11 +25,11 @@ def program
       exit(0)
     else
       puts
-      puts "answer"
+      puts @answers.rand_answers
       puts
     end
   end
 end
 
 
-program
+program 
