@@ -10,7 +10,6 @@
 # - ability to have eight ball print all answers
 # - via easter egg question ("print_answers")
 require 'colorize'
-
 require_relative "answers.rb"
 require_relative "eightball_art.rb"
 puts "\n\n\n"
@@ -39,29 +38,35 @@ puts "\n\n"
 
 @finished = false
 
-@answers = Answers.new
 
 def program
-  @answers = Answers.new
+  user_input = Answers.new 
   until @finished == true
     print "Ask the Magic Eightball a question\n\n".light_blue
-    question = gets.chomp
-    if question.include? 'quit'
+    questions = gets.chomp.to_s
+  if questions == 'quit'
       puts `clear`
       print "\n\n\n\nMagic Eightball is sad to see you leave.".light_blue
       sleep 1
       puts `clear`
       exit(0)
-    # elsif question.include? 'sudo'
-    #   question.slice! 'sudo'
-    #   @answers<< question
-    #   puts "Thanks, your input was added to avlaiable answers.".light_cyan
-    else
       puts
-      puts @answers.rand_answers
-      puts
-    end
+  elsif questions == "print_answers"
+        user_input.show_all 
+  elsif questions == "add_answers"
+    user_input.add_answers
+  elsif questions =="reset_answers"
+    user_input.reset_answers
+  else 
+    user_input.rand_answers 
+    end 
   end
 end
 
 program
+
+
+    # elsif question.include? 'sudo'
+    #   question.slice! 'sudo'
+    #   @answers<< question
+    #   puts "Thanks, your input was added to avlaiable answers.".light_cyan
